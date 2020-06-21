@@ -1,3 +1,3 @@
 # go-exercises
 
-I'm currently learning go and just putting basic go scripts here
+I'm currently learning go on my spare time and just putting basic scripts here 
