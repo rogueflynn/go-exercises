@@ -1,4 +1,7 @@
 package main
+/*
+    quicksort algorithm that uses the first index as the pivot
+*/
 
 import (
     "bufio"

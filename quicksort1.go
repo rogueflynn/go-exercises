@@ -1,4 +1,7 @@
 package main
+/*
+    Behaves more like a merge sort but the exercise required this.
+*/
 
 import (
     "bufio"
@@ -19,7 +22,6 @@ func quickSort(arr []int32) []int32 {
     var sorted []int32
 	pivot := arr[0]
 	
-	// fmt.Printf("Pivot=%d ", pivot)
     for i := 1; i < len(arr); i++ {
         if arr[i] < pivot {
 			left = append(left, arr[i])
