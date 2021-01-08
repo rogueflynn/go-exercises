@@ -1,6 +1,7 @@
 package main
 /*
-    quicksort algorithm that uses the first index as the pivot
+    in-place quicksort algorithm that uses the last index as the pivot
+    and go lang swap syntax
 */
 
 import (
@@ -11,27 +12,24 @@ import (
     "strconv"
     "strings"
 )
-
-func swap(a *int32, b *int32) {
-    var temp int32 = *a
-    *a = *b
-    *b = temp
-}
+var x int32 = 0
 
 func partition(arr []int32, low int, high int) int {
-	pivot := arr[low]
-	var i int = low+1
+	pivot := arr[high]
+	var i int = low-1
 
 	for j := low; j <= high; j++ {
 		if arr[j] < pivot {
-            //swap
-            swap(&arr[i], &arr[j])
+			//swap
+            x++
             i++
+            arr[i], arr[j] = arr[j], arr[i]
 		}
 	}
 
-    swap(&arr[low], &arr[i-1])
-	return i-1
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    x++
+	return (i+1)
 }
 
 // Complete the quickSort function below.
@@ -66,6 +64,7 @@ func main() {
     }
 
     quickSort(arr, 0, int(n)-1)
+    fmt.Printf("Swaps: %d\n", x)
 
     for _, resultItem := range arr {
         fmt.Printf("%d ", resultItem)

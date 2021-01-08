@@ -1,7 +1,4 @@
 package main
-/*
-    quicksort algorithm that uses the first index as the pivot
-*/
 
 import (
     "bufio"
@@ -12,26 +9,41 @@ import (
     "strings"
 )
 
-func swap(a *int32, b *int32) {
-    var temp int32 = *a
-    *a = *b
-    *b = temp
+var x int32 = 0
+var y int32 = 0
+// Complete the insertionSort1 function below.
+func insertionSort(arr []int32)  {
+    var i,j, value int32
+    var N = int32(len(arr))
+    for i = 1; i < N; i++ {
+        value = arr[i]
+        j = i - 1
+        
+        for j >= 0 && value < arr[j] {
+            arr[j+1] = arr[j]
+            j = j - 1
+            y++
+        }
+        arr[j+1] = value
+    }
 }
 
 func partition(arr []int32, low int, high int) int {
-	pivot := arr[low]
-	var i int = low+1
+	pivot := arr[high]
+	var i int = low-1
 
 	for j := low; j <= high; j++ {
 		if arr[j] < pivot {
-            //swap
-            swap(&arr[i], &arr[j])
+			//swap
+            x++
             i++
+            arr[i], arr[j] = arr[j], arr[i]
 		}
 	}
 
-    swap(&arr[low], &arr[i-1])
-	return i-1
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    x++
+	return (i+1)
 }
 
 // Complete the quickSort function below.
@@ -46,6 +58,7 @@ func quickSort(arr []int32, low int, high int) {
 		quickSort(arr, pi + 1, high)
 	}
 }
+
 
 func main() {
     reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
@@ -65,13 +78,12 @@ func main() {
         arr = append(arr, arrItem)
     }
 
-    quickSort(arr, 0, int(n)-1)
+    var qArr = make([]int32, len(arr), len(arr))
+    copy(qArr, arr)
+	insertionSort(arr)
+    quickSort(qArr, 0, int(n)-1)
 
-    for _, resultItem := range arr {
-        fmt.Printf("%d ", resultItem)
-    }
-
-    fmt.Printf("\n")
+    fmt.Printf("%d\n", y-x)
 }
 
 func readLine(reader *bufio.Reader) string {
@@ -88,3 +100,4 @@ func checkError(err error) {
         panic(err)
     }
 }
+
