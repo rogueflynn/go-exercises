@@ -19,17 +19,6 @@ import (
  *  3. INTEGER k
  */
 
- /*
- * Case 1: See if we can completely erase String s and append String t. If we need to waste operations 
- * to reach k operations, we can do so when String s has no characters.
- *
- * Case 2: See if we can convert String s to String t without completely erasing String s. 
- * We keep erasing charcters from String s until it becomes a prefix of String t. We then add 
- * the characters needed to turn String s into String t. If we need to waste operations to 
- * reach k operations, we can only do so in groups of 2 by doing an append and a delete.
- *
- */
-
 
 func appendAndDelete(s string, t string, k int32) string {
     // Write your code here
